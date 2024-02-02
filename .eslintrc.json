@@ -24,7 +24,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "widgetAdmin",
+            "prefix": "crm",
             "style": "camelCase"
           }
         ],
