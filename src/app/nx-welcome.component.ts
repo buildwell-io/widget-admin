@@ -2,10 +2,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'widget-admin-nx-welcome',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'crm-nx-welcome',
+    standalone: true,
+    imports: [ CommonModule ],
+    template: `
     <!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      This is a starter component and can be deleted.
@@ -432,7 +432,7 @@ import { CommonModule } from '@angular/common';
         <div id="welcome">
           <h1>
             <span> Hello there, </span>
-            Welcome widget-admin 👋
+            Welcome crm 👋
           </h1>
         </div>
         <!--  HERO  -->
@@ -882,7 +882,8 @@ nx affected:e2e</pre>
       </div>
     </div>
   `,
-  styles: [],
-  encapsulation: ViewEncapsulation.None,
+    styles: [],
+    encapsulation: ViewEncapsulation.None,
 })
-export class NxWelcomeComponent {}
+export class NxWelcomeComponent {
+}

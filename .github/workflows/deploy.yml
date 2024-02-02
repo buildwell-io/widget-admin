@@ -25,5 +25,5 @@ jobs:
           username: ${{ secrets.GA_USER }}
           key: ${{ secrets.GA_USER_KEY }}
           target: ${{ secrets.DEPLOY_DIR }}
-          source: dist/widget-admin/browser/*
+          source: dist/crm/browser/*
           strip_components: 3

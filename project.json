@@ -1,8 +1,8 @@
 {
-  "name": "widget-admin",
+  "name": "crm",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "widget-admin",
+  "prefix": "crm",
   "sourceRoot": "./src",
   "tags": [],
   "targets": {
@@ -10,7 +10,7 @@
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/widget-admin",
+        "outputPath": "dist/crm",
         "index": "./src/index.html",
         "browser": "./src/main.ts",
         "polyfills": ["zone.js"],
@@ -49,10 +49,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "widget-admin:build:production"
+          "buildTarget": "crm:build:production"
         },
         "development": {
-          "buildTarget": "widget-admin:build:development"
+          "buildTarget": "crm:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -60,7 +60,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "widget-admin:build"
+        "buildTarget": "crm:build"
       }
     },
     "lint": {

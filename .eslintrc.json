@@ -32,7 +32,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "widget-admin",
+            "prefix": "crm",
             "style": "kebab-case"
           }
         ]
