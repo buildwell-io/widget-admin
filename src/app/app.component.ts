@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { Component} from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from './components/components.module';
+
 
 @Component({
-    standalone: true,
-    imports: [ NxWelcomeComponent, RouterModule ],
-    selector: 'crm-root',
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
+  standalone: true,
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ComponentsModule,
+  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'crm';
 }
