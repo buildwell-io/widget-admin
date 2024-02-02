@@ -1,13 +1,13 @@
 <div class="wrapper">
     <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
-        <app-sidebar></app-sidebar>
+        <crm-sidebar></crm-sidebar>
         <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
     </div>
     <div class="main-panel">
-        <app-navbar></app-navbar>
+        <crm-navbar></crm-navbar>
         <router-outlet></router-outlet>
         <div *ngIf="isMaps('maps')">
-            <app-footer></app-footer>
+            <crm-footer></crm-footer>
         </div>
     </div>
     <div class="fixed-plugin">
@@ -63,13 +63,6 @@
                             Buy Pro
                         </button>
                     </div>
-                </li>
-                <li class="button-container text-center" routerLinkActive="active">
-                  <div>
-                    <a class="btn btn-default btn-block" href="https://demos.creative-tim.com/material-dashboard-angular2/#/documentation/tutorial">
-                        View Documentation
-                    </a>
-                  </div>
                 </li>
             </ul>
         </div>

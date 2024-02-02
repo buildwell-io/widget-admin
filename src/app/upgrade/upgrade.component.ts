@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app1-upgrade',
+  selector: 'crm-upgrade',
   templateUrl: './upgrade.component.html',
   styleUrls: ['./upgrade.component.css']
 })

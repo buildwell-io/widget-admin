@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app1-footer',
+  selector: 'crm-footer',
+  standalone: true,
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  imports: [
+    DatePipe,
+  ],
+  styleUrls: [ './footer.component.css' ],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   test : Date = new Date();
-  
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

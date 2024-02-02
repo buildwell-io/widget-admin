@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app1-user-profile',
+  selector: 'crm-user-profile',
+  standalone: true,
   templateUrl: './user-profile.component.html',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

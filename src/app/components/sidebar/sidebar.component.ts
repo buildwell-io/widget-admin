@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -19,12 +22,19 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 @Component({
-  selector: 'app1-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+    selector: 'crm-sidebar',
+    standalone: true,
+    templateUrl: './sidebar.component.html',
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        RouterLinkActive,
+        RouterLink,
+    ],
+    styleUrls: [ './sidebar.component.css' ],
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+  menuItems: any[] = [];
 
   constructor() { }
 

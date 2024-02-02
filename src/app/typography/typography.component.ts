@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app1-typography',
+  selector: 'crm-typography',
   templateUrl: './typography.component.html',
   styleUrls: ['./typography.component.css']
 })

@@ -1,18 +1,15 @@
 import { Component} from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentsModule } from './components/components.module';
-
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
+  selector: 'crm-root',
   imports: [
-    BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ComponentsModule,
+    RouterOutlet,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

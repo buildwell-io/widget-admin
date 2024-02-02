@@ -1,0 +1,28 @@
+<mat-grid-list cols="5" rowHeight="100vh">
+    <mat-grid-tile [colspan]="2">
+
+            <div class="d-flex flex-column" [style]="{minWidth: '380px'}">
+
+                <h1>Login</h1>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Login</mat-label>
+                    <input matInput placeholder="">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="">
+                </mat-form-field>
+
+                <button mat-raised-button
+                        class="w-100"
+                        color="primary">submit</button>
+
+            </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3">
+        <img src="./../../assets/images/gpt-login-bg.webp" class="login-bg" alt="Construction Image">
+    </mat-grid-tile>
+</mat-grid-list>

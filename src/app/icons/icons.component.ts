@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app1-icons',
+  selector: 'crm-icons',
   templateUrl: './icons.component.html',
   styleUrls: ['./icons.component.css']
 })

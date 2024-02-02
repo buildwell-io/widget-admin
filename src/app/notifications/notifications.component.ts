@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
 @Component({
-  selector: 'app1-notifications',
+  selector: 'crm-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
 
   constructor() { }
-  showNotification(from, align){
+  showNotification(from: any, align: any){
       const type = ['','info','success','warning','danger'];
 
       const color = Math.floor((Math.random() * 4) + 1);

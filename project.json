@@ -17,8 +17,22 @@
         "tsConfig": "./tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["./src/favicon.ico", "./src/assets"],
-        "styles": ["./src/styles.scss"],
-        "scripts": [],
+        "styles": [
+          "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+          "./src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/jquery/dist/jquery.js",
+          "node_modules/popper.js/dist/umd/popper.js",
+          "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+          "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+          "node_modules/chartist/dist/chartist.js"
+        ],
+        "allowedCommonJsDependencies": [
+          "rxjs/add/operator/filter",
+          "jquery",
+          "chartist"
+        ],
         "baseHref": "/app/"
       },
       "configurations": {
