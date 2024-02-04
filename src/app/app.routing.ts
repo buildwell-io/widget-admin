@@ -3,8 +3,12 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 
 export const appRoutes: Routes =[
     {
-        path: 'login',
-        loadComponent: () => import('./login/login.component').then(l => l.LoginComponent)
+        path: 'sign-in',
+        loadComponent: () => import('./sign-in/sign-in.component').then(l => l.SignInComponent)
+    },
+    {
+        path: 'sign-up',
+        loadComponent: () => import('./sign-up/sign-up.component').then(l => l.SignUpComponent)
     },
     {
       path: 'dashboard',

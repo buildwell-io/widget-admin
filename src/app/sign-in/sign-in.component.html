@@ -3,22 +3,42 @@
 
             <div class="d-flex flex-column" [style]="{minWidth: '380px'}">
 
-                <h1 class="mb-4 font-weight-bold">Login</h1>
+                <h1 class="mb-4 font-weight-bold">Sign-in</h1>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Login</mat-label>
-                    <input matInput placeholder="">
-                </mat-form-field>
+                <form [formGroup]="form"
+                      class="d-flex flex-column"
+                      (ngSubmit)="submit()">
 
-                <mat-form-field appearance="outline" class="mb-3">
-                    <mat-label>Password</mat-label>
-                    <input matInput placeholder="">
-                </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Login</mat-label>
+                        <input matInput
+                               placeholder=""
+                               formControlName="email"
+                        >
+                    </mat-form-field>
 
-                <button mat-raised-button
-                        size="lg"
-                        class="w-100"
-                        color="primary">submit</button>
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <mat-label>Password</mat-label>
+                        <input matInput
+                               formControlName="password"
+                               [type]="hide ? 'password' : 'text'"
+                               placeholder="">
+
+                    </mat-form-field>
+
+                    <button mat-raised-button
+                            size="lg"
+                            [disabled]="form.invalid"
+                            type="submit"
+                            class="w-100"
+                            color="primary">authorize</button>
+
+                </form>
+
+                <div class="d-flex mt-3">
+                    dont have an account? then &nbsp;
+                    <a routerLink="/sign-up">sign-up</a>
+                </div>
 
             </div>
     </mat-grid-tile>
