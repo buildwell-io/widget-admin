@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location, PopStateEvent } from '@angular/common';
 import { Router, NavigationEnd, NavigationStart, RouterOutlet, RouterLinkActive } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
-import jquery from "jquery";
 import { filter, Subscription } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +13,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+
+declare let $: any;
 
 @Component({
     standalone: true,
@@ -83,22 +84,22 @@ export class AdminLayoutComponent implements OnInit {
           ps = new PerfectScrollbar(elemSidebar);
       }
 
-      const window_width = jquery(window).width();
-      const $sidebar = jquery('.sidebar');
-      const $sidebar_responsive = jquery('body > .navbar-collapse');
+      const window_width = $(window).width();
+      const $sidebar = $('.sidebar');
+      const $sidebar_responsive = $('body > .navbar-collapse');
       const $sidebar_img_container = $sidebar.find('.sidebar-background');
 
 
       if(window_width && (window_width > 767)){
-          if(jquery('.fixed-plugin .dropdown').hasClass('show-dropdown')){
-              jquery('.fixed-plugin .dropdown').addClass('open');
+          if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
+              $('.fixed-plugin .dropdown').addClass('open');
           }
 
       }
 
-      jquery('.fixed-plugin a').click(function(event){
+      $('.fixed-plugin a').click((event: any) => {
         // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-          if(jquery(this).hasClass('switch-trigger')){
+          if($(this as any).hasClass('switch-trigger')){
               if(event.stopPropagation){
                   event.stopPropagation();
               }
@@ -108,14 +109,14 @@ export class AdminLayoutComponent implements OnInit {
           }
       });
 
-      jquery('.fixed-plugin .badge').click(function(){
-          let $full_page_background = jquery('.full-page-background');
+      $('.fixed-plugin .badge').click(() => {
+          let $full_page_background = $('.full-page-background');
 
 
-          jquery(this).siblings().removeClass('active');
-          jquery(this).addClass('active');
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
 
-          const new_color = jquery(this).data('color');
+          const new_color = $(this).data('color');
 
           if($sidebar.length !== 0){
               $sidebar.attr('data-color', new_color);
@@ -126,17 +127,17 @@ export class AdminLayoutComponent implements OnInit {
           }
       });
 
-      jquery('.fixed-plugin .img-holder').click(() => {
-          let $full_page_background = jquery('.full-page-background');
+      $('.fixed-plugin .img-holder').click(() => {
+          let $full_page_background = $('.full-page-background');
 
-          jquery(this).parent('li').siblings().removeClass('active');
-          jquery(this).parent('li').addClass('active');
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
 
 
-          const new_image = jquery(this).find("img").attr('src');
+          const new_image = $(this).find("img").attr('src');
 
           if($sidebar_img_container.length !=0 ){
-              $sidebar_img_container.fadeOut('fast', function(){
+              $sidebar_img_container.fadeOut('fast', ()=> {
                  $sidebar_img_container.css('background-image','url("' + new_image + '")');
                  $sidebar_img_container.fadeIn('fast');
               });
@@ -144,7 +145,7 @@ export class AdminLayoutComponent implements OnInit {
 
           if($full_page_background.length != 0){
 
-              $full_page_background.fadeOut('fast', function(){
+              $full_page_background.fadeOut('fast', ()=> {
                  $full_page_background.css('background-image','url("' + new_image + '")');
                  $full_page_background.fadeIn('fast');
               });

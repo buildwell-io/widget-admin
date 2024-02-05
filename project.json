@@ -32,8 +32,7 @@
           "rxjs/add/operator/filter",
           "jquery",
           "chartist"
-        ],
-        "baseHref": "/app/"
+        ]
       },
       "configurations": {
         "production": {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 declare var $: any;
 @Component({
   selector: 'crm-notifications',
+  standalone: true,
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })

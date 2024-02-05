@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { PASSWORD_REGEXP } from '../constants/regex..constants';
+import { PASSWORD_REGEXP } from '../constants/regex.constants';
 import { AuthService } from '../services/auth.service';
 
 
