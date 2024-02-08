@@ -55,6 +55,5 @@ export class SignUpComponent {
             this.router.navigate(['/sign-in'])
           })
     }
-    console.log(this.form.value);
   }
 }

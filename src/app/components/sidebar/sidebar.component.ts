@@ -29,7 +29,7 @@ export const ROUTES: RouteInfo[] = [
         RouterLinkActive,
         RouterLink,
     ],
-    styleUrls: [ './sidebar.component.css' ],
+    styleUrls: [ './sidebar.component.scss' ],
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[] = [];

@@ -111,12 +111,12 @@ export class AdminLayoutComponent implements OnInit {
 
       $('.fixed-plugin .badge').click(() => {
           let $full_page_background = $('.full-page-background');
+          const that = $(this);
 
+          that.siblings().removeClass('active');
+          that.addClass('active');
 
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          const new_color = $(this).data('color');
+          const new_color = that.data('color');
 
           if($sidebar.length !== 0){
               $sidebar.attr('data-color', new_color);
