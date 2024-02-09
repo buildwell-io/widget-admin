@@ -1,6 +1,6 @@
 {
   "name": "@crm/source",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "buildwell.io",
   "scripts": {
     "start": "nx serve",
