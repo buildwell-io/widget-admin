@@ -9,6 +9,7 @@ import { PASSWORD_REGEXP } from '../constants/regex.constants';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/shared/storage.service';
 
 @Component({
   selector: 'crm-sign-up',
@@ -41,6 +42,7 @@ export class SignUpComponent {
 
   constructor(
       private readonly authService: AuthService,
+      private readonly storageService: StorageService,
       private readonly router: Router) {
   }
 
@@ -51,8 +53,9 @@ export class SignUpComponent {
   submit(){
     if (this.form.valid) {
       this.authService.signUp(this.form.value as any)
-          .subscribe((response: any) => {
-            this.router.navigate(['/sign-in'])
+          .subscribe((response: { access: {token: string}, refresh: {token: string} }) => {
+            this.storageService.saveTokens(response);
+            this.router.navigate(['/sign-in']);
           })
     }
   }

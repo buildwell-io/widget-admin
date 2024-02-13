@@ -1,4 +1,4 @@
 export const ENV = {
-    baseUrl: 'https://buildwell.io/api/v1',
+    baseUrl: 'https://api.buildwell.io/v1',
 
 }

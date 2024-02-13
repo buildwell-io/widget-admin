@@ -52,8 +52,9 @@ export class SignInComponent {
       this.authService.signIn(this.form.value as any)
           .subscribe(() => {
             this.router.navigate(['/dashboard'])
+          }, (error) => {
+            console.log(error);
           })
     }
-    console.log(this.form.value);
   }
 }

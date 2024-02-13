@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../services/auth.service';
+import { USER_TKNS } from '../../constants/app.constants';
+import { StorageService } from '../../services/shared/storage.service';
+import { finalize } from 'rxjs';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -23,18 +28,23 @@ export const ROUTES: RouteInfo[] = [
     selector: 'crm-sidebar',
     standalone: true,
     templateUrl: './sidebar.component.html',
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        RouterLinkActive,
-        RouterLink,
-    ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    RouterLinkActive,
+    RouterLink,
+    MatIconModule,
+  ],
     styleUrls: [ './sidebar.component.scss' ],
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[] = [];
 
-  constructor() { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly storageService: StorageService,
+    private readonly router: Router
+    ) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -45,4 +55,21 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
+
+  logout() {
+    this.authService
+      .logout()
+      .pipe(
+        finalize(() => {
+          this.storageService.removeItem(USER_TKNS);
+          this.router.navigate(['/sign-in'])
+        })
+      )
+      .subscribe()
+  }
+
+  // HELPERS
+  get localStorage() {
+    return window.localStorage;
+  }
 }
