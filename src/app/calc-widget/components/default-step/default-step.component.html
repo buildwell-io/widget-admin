@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+<div>
+    <label>First Name</label>
+    <input type="text" formControlName="firstName">
+</div>
+<div>
+    <label>Last Name</label>
+    <input type="text" formControlName="lastName">
+</div>
+<div>
+    <label>Gender</label>
+    <div>
+          <span>
+            <input id="male" type="radio" value="male" formControlName="gender">
+            <label for="male">Male</label>
+          </span>
+        <span>
+            <input id="female" type="radio" value="female" formControlName="gender">
+            <label for="female">Female</label>
+          </span>
+    </div>
+</div>
+<div>
+    <label>Date of Birth</label>
+    <input type="date" formControlName="dob">
+</div>
+</form>
