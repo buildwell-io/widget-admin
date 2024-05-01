@@ -1,0 +1,32 @@
+<div [formGroup]="form">
+    <label [attr.for]="step.key">{{step.label}}</label>
+
+    @switch(step.controlType) {
+        @case('textbox') {
+            <input [formControlName]="step.key"
+                    [id]="step.key" [type]="step.type">
+
+        }
+
+        @case('dropdown') {
+            <select [id]="step.key"
+                    [formControlName]="step.key">
+                @for(opt of step.options; track opt.key) {
+                <option [value]="opt.key">{{opt.value}}</option>
+                }
+            </select>
+        }
+    }
+
+    @if(!isValid) {
+        <div class="errorMessage">{{step.label}} is required</div>
+    }
+
+</div>
+
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
