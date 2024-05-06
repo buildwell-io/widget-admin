@@ -1,4 +1,59 @@
+<div style="display: flex;gap: 16px; margin-top: 64px">
+    <div style="width: 512px; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
+        <h2 style="width: 100%">Editor</h2>
 
-<crm-dynamic-form [steps]="dynamicFormStepService.getQuestions() | async"></crm-dynamic-form>
+        @if (fetchService.getSteps() | async; as steps) {
+            @for (step of steps; track step.id) {
+                <div style="border: 1px solid; padding: 8px">
+                    <h4>{{ step.title }}</h4>
 
-<button (click)="createNewControl()">add new control</button>
+                    @if (step.type === 'select') {
+                        @for (answer of fetchService.getStepAnswers(step.id) | async; track answer.id) {
+                            <div style="border: 1px solid; padding: 8px">
+                                <span>{{ answer.text }}</span>
+                                <span> -> </span>
+                                <select>
+                                    @for (nextStep of filter(steps, step); track nextStep.id) {
+                                        <option [selected]="nextStep.id === answer.nextStep">
+                                            {{ nextStep.title }}
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                    }
+
+                    @if (step.type === 'input') {
+                        <div style="border: 1px solid; padding: 8px">
+                            <input type="text" [attr.placeholder]="step.title" />
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+
+    <div style="width: 512px; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
+        <h2>Visualizer</h2>
+
+        <button (click)="activeStep = null">Reset</button>
+
+        @if (getStep() | async; as initialStep) {
+            <div style="border: 1px solid; padding: 8px">
+                <h4>{{ initialStep.title }}</h4>
+
+                @if (initialStep.type === 'select') {
+                    @if (fetchService.getStepAnswers(initialStep.id) | async; as answers) {
+                        @for (answer of answers; track answer.id) {
+                            <button (click)="activeStep = answer.nextStep">{{ answer.text }}</button>
+                        }
+                    }
+                }
+
+                @if (initialStep.type === 'input') {
+                    <input type="text" />
+                }
+            </div>
+        }
+    </div>
+</div>

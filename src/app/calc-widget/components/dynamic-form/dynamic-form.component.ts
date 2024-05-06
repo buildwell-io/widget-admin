@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { DynamicFormStepBase } from './dynamic-form-step-base';
+import { AbstractControl } from './abstract-control';
 import { DynamicFormControlService } from './dynamic-form-control.service';
 import { DynamicFormQuestionComponent } from './dynamic-form-step/dynamic-form-step.component';
 
@@ -11,12 +11,13 @@ import { DynamicFormQuestionComponent } from './dynamic-form-step/dynamic-form-s
   selector: 'crm-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   imports: [ CommonModule, DynamicFormQuestionComponent, ReactiveFormsModule ],
+  providers: [DynamicFormControlService],
 })
 export class DynamicFormComponent {
-  @Input() steps: DynamicFormStepBase<string>[] | null = [];
+  @Input() steps: AbstractControl<string>[] | null = [];
 
   get form(): FormGroup {
-    return this.qcs.toFormGroup(this.steps as DynamicFormStepBase<string>[]);
+    return this.qcs.toFormGroup(this.steps as AbstractControl<string>[]);
   }
 
   payLoad = '';

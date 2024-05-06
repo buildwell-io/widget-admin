@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
-
-import { DropdownCtrl } from './dynamic-form-dropdown';
-import { DynamicFormStepBase } from './dynamic-form-step-base';
-import { TextboxCtrl } from './dynamic-form-textbox';
 import { of } from 'rxjs';
+import { DropdownControl } from './dropdown-control';
+import { TextboxControl } from './textbox-control';
+import { AbstractControl } from './abstract-control';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DynamicFormStepService {
-  private questions: DynamicFormStepBase<string>[] = [
+  private questions: AbstractControl<string>[] = [
 
-    new DropdownCtrl({
+    new DropdownControl({
       key: 'brave',
       label: 'Bravery Rating',
       options: [
-        {key: 'solid',  value: 'Solid'},
-        {key: 'great',  value: 'Great'},
-        {key: 'good',   value: 'Good'},
-        {key: 'unproven', value: 'Unproven'}
+        { key: 'solid', value: 'Solid' },
+        { key: 'great', value: 'Great' },
+        { key: 'good', value: 'Good' },
+        { key: 'unproven', value: 'Unproven' },
       ],
-      order: 3
+      order: 3,
     }),
 
-    new TextboxCtrl({
+    new TextboxControl({
       key: 'firstName',
       label: 'First name',
       value: 'Bombasto',
       required: true,
-      order: 1
+      order: 1,
     }),
 
-    new TextboxCtrl({
+    new TextboxControl({
       key: 'emailAddress',
       label: 'Email',
       type: 'email',
-      order: 2
-    })
+      order: 2,
+    }),
   ];
 
   // TODO: get from a remote source of question metadata
@@ -43,12 +42,13 @@ export class DynamicFormStepService {
   }
 
   createNewQuestion() {
-    this.questions.push(new TextboxCtrl({
+    this.questions.push(new TextboxControl({
       key: Math.random().toString(),
       label: 'fghjkl',
       value: 'bumbastic',
       required: true,
-      order: 3}))
+      order: 3,
+    }));
   }
 }
 

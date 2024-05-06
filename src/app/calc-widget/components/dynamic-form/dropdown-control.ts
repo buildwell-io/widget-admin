@@ -1,6 +1,6 @@
-import { DynamicFormStepBase } from './dynamic-form-step-base';
+import { AbstractControl } from './abstract-control';
 
-export class DropdownCtrl extends DynamicFormStepBase<string> {
+export class DropdownControl extends AbstractControl<string> {
   override controlType = 'dropdown';
 }
 

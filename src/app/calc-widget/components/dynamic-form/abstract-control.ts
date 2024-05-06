@@ -1,12 +1,12 @@
-export class DynamicFormStepBase<T> {
-  value: T|undefined;
+export abstract class AbstractControl<T> {
+  value: T | undefined;
   key: string;
   label: string;
   required: boolean;
   order: number;
   controlType: string;
   type: string;
-  options: {key: string, value: string}[];
+  options: { key: string, value: string }[];
 
   constructor(options: {
     value?: T;
@@ -16,7 +16,7 @@ export class DynamicFormStepBase<T> {
     order?: number;
     controlType?: string;
     type?: string;
-    options?: {key: string, value: string}[];
+    options?: { key: string, value: string }[];
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';

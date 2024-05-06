@@ -1,7 +1,7 @@
 <div>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-        @for(step of steps; track step) {
+        @for(step of steps; track step.key) {
             <div class="form-row">
                 <crm-dynamic-form-step [step]="step"
                               [form]="form"></crm-dynamic-form-step>
