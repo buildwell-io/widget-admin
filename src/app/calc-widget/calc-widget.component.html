@@ -1,10 +1,24 @@
 <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 64px">
+
+    <svg #d3root></svg>
+
+    <ng-template #nodeTemplate let-data>
+        <foreignObject width="100" height="20">
+            <div style="width: 100px; height: 20px;">
+                {{ data | json }}
+            </div>
+        </foreignObject>
+    </ng-template>
+
+
+
+
     <div style="width: 90%; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
         <h2 style="width: 100%">Editor</h2>
 
         @if (fetchService.getSteps() | async; as steps) {
             @for (step of steps; track step.id) {
-                <mat-card style="width: 300px">
+                <mat-card style="width: 100%">
                     <mat-card-header>
                         <mat-card-title>{{ step.title }}</mat-card-title>
                     </mat-card-header>
@@ -12,10 +26,17 @@
                     <mat-card-content>
                         @if (step.type === 'select') {
                             @for (answer of fetchService.getStepAnswers(step.id) | async; track answer.id) {
-                                <mat-grid-list cols="3" rowHeight="80px">
-                                    <mat-grid-tile colspan="3" rowspan="1">{{ answer.text }}</mat-grid-tile>
-                                    <mat-grid-tile colspan="2" rowspan="1">
-                                        <mat-form-field>
+                                <mat-grid-list cols="9">
+                                    <mat-grid-tile colspan="4" rowspan="1">
+                                        <mat-form-field style="width: 100%">
+                                            <mat-label>Answer text</mat-label>
+                                            <input matInput [value]="answer.text">
+                                        </mat-form-field>
+                                    </mat-grid-tile>
+
+                                    <mat-grid-tile colspan="4" rowspan="1">
+                                        <mat-form-field style="width: 100%">
+                                            <mat-label>Next step</mat-label>
                                             <mat-select [value]="answer.nextStep">
                                                 @for (nextStep of filter(steps, step); track nextStep.id) {
                                                     <mat-option [value]="nextStep.id">{{ nextStep.title }}</mat-option>
