@@ -1,45 +1,71 @@
-<div style="display: flex;gap: 16px; margin-top: 64px">
-    <div style="width: 512px; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 64px">
+    <div style="width: 90%; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
         <h2 style="width: 100%">Editor</h2>
 
         @if (fetchService.getSteps() | async; as steps) {
             @for (step of steps; track step.id) {
-                <div style="border: 1px solid; padding: 8px">
-                    <h4>{{ step.title }}</h4>
+                <mat-card style="width: 300px">
+                    <mat-card-header>
+                        <mat-card-title>{{ step.title }}</mat-card-title>
+                    </mat-card-header>
 
-                    @if (step.type === 'select') {
-                        @for (answer of fetchService.getStepAnswers(step.id) | async; track answer.id) {
-                            <div style="border: 1px solid; padding: 8px">
-                                <span>{{ answer.text }}</span>
-                                <span> -> </span>
-                                <select>
-                                    @for (nextStep of filter(steps, step); track nextStep.id) {
-                                        <option [selected]="nextStep.id === answer.nextStep">
-                                            {{ nextStep.title }}
-                                        </option>
-                                    }
-                                </select>
-                            </div>
+                    <mat-card-content>
+                        @if (step.type === 'select') {
+                            @for (answer of fetchService.getStepAnswers(step.id) | async; track answer.id) {
+                                <mat-grid-list cols="3" rowHeight="80px">
+                                    <mat-grid-tile colspan="3" rowspan="1">{{ answer.text }}</mat-grid-tile>
+                                    <mat-grid-tile colspan="2" rowspan="1">
+                                        <mat-form-field>
+                                            <mat-select [value]="answer.nextStep">
+                                                @for (nextStep of filter(steps, step); track nextStep.id) {
+                                                    <mat-option [value]="nextStep.id">{{ nextStep.title }}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </mat-grid-tile>
+
+                                    <mat-grid-tile colspan="1" rowspan="1">
+                                        <button mat-icon-button color="warn" (click)="onRemoveClick(answer.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+
+                                @if (!$last) {
+                                    <mat-divider style="margin: 16px"></mat-divider>
+                                }
+                            }
                         }
-                    }
 
-                    @if (step.type === 'input') {
-                        <div style="border: 1px solid; padding: 8px">
-                            <input type="text" [attr.placeholder]="step.title" />
-                        </div>
-                    }
-                </div>
+
+                        @if (step.type === 'input') {
+                            <mat-form-field>
+                                <mat-label>{{ step.title }}</mat-label>
+                                <input matInput [attr.placeholder]="step.title"/>
+                            </mat-form-field>
+                        }
+                    </mat-card-content>
+
+                    <mat-card-footer style="padding: 16px">
+                        <button
+                                mat-flat-button
+                                color="primary"
+                                style="width: 100%"
+                                (click)="onAddAnswerClick(step.id, filter(steps, step))"
+                        >Add</button>
+                    </mat-card-footer>
+                </mat-card>
             }
         }
     </div>
 
-    <div style="width: 512px; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
+    <div style="width: 90%; border: 1px solid; padding: 16px; display: flex; gap: 8px; flex-wrap: wrap">
         <h2>Visualizer</h2>
 
         <button (click)="activeStep = null">Reset</button>
 
         @if (getStep() | async; as initialStep) {
-            <div style="border: 1px solid; padding: 8px">
+            <mat-card>
                 <h4>{{ initialStep.title }}</h4>
 
                 @if (initialStep.type === 'select') {
@@ -51,9 +77,9 @@
                 }
 
                 @if (initialStep.type === 'input') {
-                    <input type="text" />
+                    <input type="text"/>
                 }
-            </div>
+            </mat-card>
         }
     </div>
 </div>

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-declare var $: any;
+import "jquery-notifier";
+import * as $ from 'jquery';
+// declare var $: any;
+
 @Component({
   selector: 'crm-notifications',
   standalone: true,
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent {
 
   constructor() { }
   showNotification(from: any, align: any){
@@ -14,7 +17,7 @@ export class NotificationsComponent implements OnInit {
 
       const color = Math.floor((Math.random() * 4) + 1);
 
-      $.notify({
+    ($ as any).notify({
           icon: "notifications",
           message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
 
@@ -36,8 +39,6 @@ export class NotificationsComponent implements OnInit {
             '<a href="{3}" target="{4}" data-notify="url"></a>' +
           '</div>'
       });
-  }
-  ngOnInit() {
   }
 
 }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { EventBusService } from './services/shared/event-bus.service';
 import { SharedService } from './services/shared/shared.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   standalone: true,
@@ -13,6 +14,7 @@ import { SharedService } from './services/shared/shared.service';
   imports: [
     CommonModule,
     FormsModule,
+    MatCardModule,
     RouterOutlet,
   ],
   templateUrl: './app.component.html',
