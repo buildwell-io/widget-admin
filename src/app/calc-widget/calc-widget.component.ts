@@ -19,6 +19,69 @@ import { ANSWERS } from './entities/data';
 import * as d3 from 'd3';
 import { RouterOutlet } from '@angular/router';
 
+function graph(svg: d3.Selection<any, any, any, any>, source: d3.HierarchyNode<unknown>, {
+  label = (d: any) => d.data.id,
+  highlight = (arg: any): boolean => false,
+} = {}) {
+  const marginTop = 32;
+  const marginLeft = 400;
+
+  const dx = 64;
+  const dy = 86;
+  const tree = d3.tree().nodeSize([ dx, dy ]);
+  const treeLink = d3.linkVertical<d3.HierarchyPointLink<any>, any>().x((d) => d.x).y((d) => d.y);
+
+  const root = tree(source);
+
+  let x0 = Infinity;
+  let x1 = -x0;
+
+  root.each((d) => {
+    if (d.x > x1) x1 = d.x;
+    if (d.x < x0) x0 = d.x;
+  });
+
+  const g = svg.append('g')
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', 10)
+    .attr('transform', `translate(${marginLeft}, ${marginTop})`);
+
+  const link = g.append('g')
+    .attr('fill', 'none')
+    .attr('stroke', '#555')
+    .attr('stroke-opacity', 0.4)
+    .attr('stroke-width', 1.5)
+    .selectAll('path')
+    .data(root.links())
+    .join('path')
+    .attr('stroke', (d) => highlight(d.source) && highlight(d.target) ? 'red' : null)
+    .attr('stroke-opacity', (d) => highlight(d.source) && highlight(d.target) ? 1 : null)
+    .attr('d', treeLink);
+
+  const node = g.append('g')
+    .attr('stroke-linejoin', 'round')
+    .attr('stroke-width', 3)
+    .selectAll('g')
+    .data(root.descendants())
+    .join('g')
+    .attr('transform', (d) => `translate(${d.x}, ${d.y})`);
+
+  node.append('circle')
+    .attr('fill', (d) => highlight(d) ? 'red' : d.children ? '#555' : '#999')
+    .attr('r', 5);
+
+  node.append('text')
+    .attr('fill', (d) => highlight(d) ? 'red' : null)
+    .attr('stroke', 'white')
+    .attr('paint-order', 'stroke')
+    .attr('dy', '0.31em')
+    .attr('x', (d) => d.children ? -6 : 6)
+    .attr('text-anchor', (d) => d.children ? 'end' : 'start')
+    .text((d) => (d.data as any).name);
+
+  return svg.node();
+}
+
 @Component({
   selector: 'crm-calc-widget',
   standalone: true,
@@ -42,6 +105,9 @@ export class CalcWidgetComponent implements OnInit {
   @ViewChild('d3root', { static: true })
   public readonly d3root!: ElementRef<SVGElement>;
 
+  @ViewChild('d3root2', { static: true })
+  public readonly d3root2!: ElementRef<SVGElement>;
+
   @ViewChild('nodeTemplate', { static: true, read: TemplateRef })
   public readonly nodeTemplate!: TemplateRef<any>;
 
@@ -62,40 +128,65 @@ export class CalcWidgetComponent implements OnInit {
       name: 'Eve',
       children: [
         { name: 'Cain' },
-        { name: 'Seth', children: [ { name: 'Enos' }, { name: 'Noam' } ] },
-        { name: 'Abel' },
-        { name: 'Awan', children: [ { name: 'Enoch' } ] },
+        {
+          name: 'Seth',
+          children: [
+            { name: 'Enos' },
+            {
+              name: 'Noam',
+              children: [
+                { name: 'Noam 1' },
+                { name: 'Noam 2' },
+                { name: 'Noam 3' },
+                { name: 'Noam 4' },
+                { name: 'Noam 5' },
+                {
+                  name: 'Noam 6',
+                  children: [
+                    { name: 'Noam 6.1' },
+                    { name: 'Noam 6.2' },
+                    { name: 'Noam 6.3' },
+                    { name: 'Noam 6.4' },
+                    { name: 'Noam 6.5' },
+                  ],
+                },
+              ],
+            },
+            { name: 'Roman' },
+            { name: 'Denis' },
+          ],
+        },
+        {
+          name: 'Abel',
+          children: [
+            { name: '1' },
+            { name: '2' },
+          ],
+        },
+        {
+          name: 'Awan',
+          children: [
+            { name: 'Enoch' },
+          ],
+        },
         { name: 'Azura' },
       ],
     });
 
-    const g = svg.append('g').attr('transform', 'translate(20, 20)');
+    const foo = graph(svg, root as d3.HierarchyNode<unknown>, {
+      highlight: (d: any) => [ 'Eve', 'Seth', 'Noam', 'Noam 6', 'Noam 6.1' ].includes(d.data.name),
+    })!;
 
-    g.append("g")
-      .attr("fill", "none")
-      .attr("stroke", '#555')
-      .attr("stroke-opacity", 0.4)
-      .attr("stroke-linecap", 'round')
-      .attr("stroke-linejoin", 'round')
-      .attr("stroke-width", '1')
-      .selectAll("path")
-      // .data<{ source: [number, number], target: [ number, number ]}>([
-      //   { source: [10, 10], target: [200, 200] },
-      // ])
-      .data<{ source: [number, number], target: [ number, number ]}>(
-        d3.map(root.links(), (_, i) => ({ source: [10 * i, 10 * i], target: [50 * i, 50 * i ]} ))
-      )
-      .join("path")
-      .attr("d", d3.link(d3.curveBumpX).x((d) => d[1]).y((d) => d[0]));
+    this.d3root2.nativeElement.appendChild(foo);
 
-    g
-      .attr('width', 400)
-      .attr('height', 300)
-      .selectAll()
-      .data(root.descendants())
-      .join('g')
-      .attr('transform', (_, i) => `translate(${50 * i}, ${20 * i})`)
-      .each((d, i, nodes) => this.createNode(d, nodes[i]));
+    // g
+    //   .attr('width', 400)
+    //   .attr('height', 300)
+    //   .selectAll()
+    //   .data(root.descendants())
+    //   .join('g')
+    //   .attr('transform', (_, i) => `translate(${50 * i}, ${20 * i})`)
+    //   .each((d, i, nodes) => this.createNode(d, nodes[i]));
   }
 
   private createNode(data: any, container: any): void {
