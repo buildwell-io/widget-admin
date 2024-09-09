@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use './app/components/shell/shell-theme' as shell;
+
+@include mat.core();
+
+$crm-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    bold-weight: 900,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+html {
+  @include mat.all-component-themes($crm-theme);
+  @include mat.typography-hierarchy($crm-theme);
+  @include shell.theme($crm-theme);
+}
+
 html, body {
   margin: 0;
   width: 100%;

@@ -1,0 +1,45 @@
+<mat-drawer-container class="container">
+    <mat-drawer #drawer mode="over"></mat-drawer>
+
+    <mat-drawer-content>
+        <mat-toolbar class="toolbar">
+            <button mat-icon-button aria-label="sidebar toggle" (click)="drawer.toggle()">
+                <mat-icon svgIcon="crm:menu"/>
+            </button>
+
+            <span>buildwell.io</span>
+
+            <span class="spacer"></span>
+
+            <button mat-icon-button aria-label="instagram link">
+                <mat-icon svgIcon="crm:user"/>
+            </button>
+
+            <button mat-icon-button aria-label="facebook link">
+                <mat-icon svgIcon="crm:log-in"/>
+            </button>
+        </mat-toolbar>
+
+        <div class="mini-drawer-container">
+            <div class="mini-drawer">
+                @for (item of toolbarItems; track $index) {
+                    <button mat-icon-button [attr.aria-label]="item.title" [matTooltip]="item.title" matTooltipPosition="right">
+                        <mat-icon [svgIcon]="item.icon"/>
+                    </button>
+                }
+            </div>
+
+            <div class="mini-drawer-content mat-body-medium">
+                <ng-content/>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut, dolore impedit libero maiores
+                officia quibusdam ratione? Aliquam architecto aspernatur dignissimos distinctio doloremque
+                exercitationem facilis fugiat fugit in ipsum laborum laudantium magnam minus mollitia nemo neque nobis
+                non nulla officiis porro provident quos, vero vitae. Adipisci architecto consectetur debitis dolores ea
+                error est illo impedit inventore ipsum itaque iusto nobis, quam soluta sunt suscipit vel vitae!
+                Consequatur doloremque id maiores molestias nobis rerum similique suscipit! Est illum nemo sint.
+                Accusamus asperiores autem commodi dicta dignissimos, distinctio dolores eligendi error iste modi nobis
+                quae quasi quo rem tempore veniam vero! Ratione?
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
