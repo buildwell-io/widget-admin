@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  position: fixed;
+  width: 96px;
+  height: 100%;
+  padding: 64px 0 24px 0;
+  box-sizing: border-box;
+}
+
+.rail-navigation-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.rail-navigation-item-icon {
+  display: block;
+  width: 56px;
+  height: 32px;
+  margin: 0 auto;
+  padding: 4px 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+
+  .mat-icon {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.rail-navigation-item-label {
+  display: block;
+  text-align: center;
+  margin-top: 4px;
+}

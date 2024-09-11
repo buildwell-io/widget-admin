@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+@use 'sass:color';
+
+@mixin color($theme) {
+  crm-rail-navigation {
+    background-color: mat.get-theme-color($theme, surface);
+  }
+
+  .rail-navigation-item-icon .mat-icon,
+  .rail-navigation-item-label {
+    color: mat.get-theme-color($theme, on-surface-variant);
+  }
+
+  .rail-navigation-item:hover {
+    .rail-navigation-item-icon {
+      background-color: color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.08);
+    }
+  }
+
+  .rail-navigation-item:active,
+  .rail-navigation-item:focus {
+    .rail-navigation-item-icon {
+      background-color: color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.12);
+    }
+  }
+
+  .rail-navigation-item.selected {
+    .rail-navigation-item-icon {
+      background-color: mat.get-theme-color($theme, secondary-container);
+    }
+  }
+
+  .rail-navigation-item:hover,
+  .rail-navigation-item:active,
+  .rail-navigation-item:focus,
+  .rail-navigation-item.selected {
+    .rail-navigation-item-icon .mat-icon {
+      color: mat.get-theme-color($theme, on-secondary-container);
+      font-variation-settings: "wght" 500, "opsz" 24;
+    }
+  }
+}
+
+@mixin typography($theme) {
+  .rail-navigation-item-label {
+    font: mat.get-theme-typography($theme, label-medium, font);
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+@use '../app/components/shell/shell-theme' as shell;
+@use '../app/components/rail-navigation/rail-navigation-theme' as rail-navigation;
+@use '../app/components/header/header-theme' as header;
+
+@include mat.core();
+
+$crm-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    bold-weight: 900,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+html {
+  @include mat.all-component-themes($crm-theme);
+  @include mat.typography-hierarchy($crm-theme);
+
+  @include shell.theme($crm-theme);
+  @include rail-navigation.theme($crm-theme);
+  @include header.theme($crm-theme);
+}
+
+html, body {
+  background-color: mat.get-theme-color($crm-theme, surface);
+}

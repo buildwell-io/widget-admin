@@ -1,13 +1,12 @@
 @use '@angular/material' as mat;
 
 @mixin color($theme) {
-  .toolbar {
-    background-color: mat.get-theme-color($theme, primary-container);
+  .content {
+    background-color: mat.get-theme-color($theme, surface);
   }
 
-  .mini-drawer {
-    border-right-color: mat.get-theme-color($theme, outline-variant);
-    background-color: mat.get-theme-color($theme, background);
+  .container {
+    background-color: mat.get-theme-color($theme, surface-container-lowest);
   }
 }
 
