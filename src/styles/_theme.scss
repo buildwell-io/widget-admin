@@ -3,6 +3,7 @@
 @use '../app/components/rail-navigation/rail-navigation-theme' as rail-navigation;
 @use '../app/components/header/header-theme' as header;
 @use '../app/pages/sign-in/sign-in-theme' as sign-in;
+@use '../app/pages/sign-up/sign-up-theme' as sign-up;
 
 @include mat.core();
 
@@ -29,6 +30,7 @@ html {
   @include rail-navigation.theme($crm-theme);
   @include header.theme($crm-theme);
   @include sign-in.theme($crm-theme);
+  @include sign-up.theme($crm-theme);
 }
 
 html, body {

@@ -1,0 +1,21 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  .crm-sign-up-container {
+    background-color: mat.get-theme-color($theme, surface-container-lowest);
+  }
+}
+
+@mixin typography($theme) {
+
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}
