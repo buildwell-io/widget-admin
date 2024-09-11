@@ -1,11 +1,11 @@
 @use '@angular/material' as mat;
 
 @mixin color($theme) {
-  .content {
+  .crm-shell-content {
     background-color: mat.get-theme-color($theme, surface);
   }
 
-  .container {
+  .crm-shell-container {
     background-color: mat.get-theme-color($theme, surface-container-lowest);
   }
 }
