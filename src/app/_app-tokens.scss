@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use 'utils';
+
+@use './components/components-tokens';
+@use './pages/pages-tokens';
+
+@function get-tokens($theme) {
+  @return utils.deep-merge-all(
+      components-tokens.get-tokens($theme),
+      pages-tokens.get-tokens($theme),
+  );
+}

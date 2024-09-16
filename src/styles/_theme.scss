@@ -1,38 +1,19 @@
 @use '@angular/material' as mat;
-@use '../app/components/shell/shell-theme' as shell;
-@use '../app/components/rail-navigation/rail-navigation-theme' as rail-navigation;
-@use '../app/components/header/header-theme' as header;
-@use '../app/pages/sign-in/sign-in-theme' as sign-in;
-@use '../app/pages/sign-up/sign-up-theme' as sign-up;
+@use 'utils';
 
-@include mat.core();
+@use '../app/app-tokens';
 
-$crm-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  typography: (
-    brand-family: 'Roboto',
-    bold-weight: 900,
-  ),
-  density: (
-    scale: 0,
-  )
-));
+@mixin core($theme) {
+  @include mat.core();
 
-html {
-  @include mat.all-component-themes($crm-theme);
-  @include mat.typography-hierarchy($crm-theme);
+  html {
+    @include mat.all-component-themes($theme);
+    @include mat.typography-hierarchy($theme);
 
-  @include shell.theme($crm-theme);
-  @include rail-navigation.theme($crm-theme);
-  @include header.theme($crm-theme);
-  @include sign-in.theme($crm-theme);
-  @include sign-up.theme($crm-theme);
-}
+    @include utils.create-tokens-vars(app-tokens.get-tokens($theme));
+  }
 
-html, body {
-  background-color: mat.get-theme-color($crm-theme, surface);
+  html, body {
+    background-color: mat.get-theme-color($theme, surface);
+  }
 }

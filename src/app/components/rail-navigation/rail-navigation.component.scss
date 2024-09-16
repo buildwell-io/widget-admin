@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use 'utils';
 
 :host {
   display: flex;
@@ -10,11 +10,53 @@
   height: 100%;
   padding: 64px 0 24px 0;
   box-sizing: border-box;
+
+  @include utils.use-token(background-color, rail-navigation-background-color);
 }
 
 .rail-navigation-item {
   cursor: pointer;
   user-select: none;
+
+  &:hover {
+    .rail-navigation-item-icon {
+      @include utils.use-token(background-color, rail-navigation-item-hover-icon-background-color);
+
+      .mat-icon {
+        font-variation-settings: "wght" 500, "opsz" 24;
+      }
+    }
+  }
+
+  &:focus {
+    .rail-navigation-item-icon {
+      @include utils.use-token(background-color, rail-navigation-item-focus-icon-background-color);
+
+      .mat-icon {
+        font-variation-settings: "wght" 500, "opsz" 24;
+      }
+    }
+  }
+
+  &:active {
+    .rail-navigation-item-icon {
+      @include utils.use-token(background-color, rail-navigation-item-active-icon-background-color);
+
+      .mat-icon {
+        font-variation-settings: "wght" 500, "opsz" 24;
+      }
+    }
+  }
+
+  &.selected {
+    .rail-navigation-item-icon {
+      @include utils.use-token(background-color, rail-navigation-item-selected-icon-background-color);
+
+      .mat-icon {
+        font-variation-settings: "wght" 500, "opsz" 24;
+      }
+    }
+  }
 }
 
 .rail-navigation-item-icon {
@@ -29,6 +71,8 @@
   .mat-icon {
     display: block;
     margin: 0 auto;
+
+    @include utils.use-token(color, rail-navigation-item-icon-color);
   }
 }
 
@@ -36,4 +80,7 @@
   display: block;
   text-align: center;
   margin-top: 4px;
+
+  @include utils.use-token(color, rail-navigation-item-label-color);
+  @include utils.use-token(font, rail-navigation-item-label-font);
 }

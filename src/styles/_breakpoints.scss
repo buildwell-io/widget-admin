@@ -1,0 +1,12 @@
+@use 'variables' as *;
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $min-width: map-get($breakpoints, $breakpoint);
+    @media screen and (min-width: #{$min-width}) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint '#{$breakpoint}'";
+  }
+}

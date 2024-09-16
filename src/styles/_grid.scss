@@ -1,15 +1,5 @@
 @use 'sass:math';
-
-$container-max-widths: (
-  "sm": 540px,
-  "md": 720px,
-  "lg": 960px,
-  "xl": 1140px
-);
-
-$grid-columns: 4;
-
-$gutter-width: 16px;
+@use 'variables' as *;
 
 /* CONTAINER */
 .container {
@@ -20,9 +10,9 @@ $gutter-width: 16px;
   margin-left: auto;
   box-sizing: border-box;
 
-  @each $breakpoint, $container-max-width in $container-max-widths {
-    @media (min-width: #{$container-max-width}) {
-      max-width: $container-max-width;
+  @each $name, $breakpoint in $breakpoints {
+    @media screen and (min-width: #{$breakpoint}) {
+      max-width: $breakpoint;
     }
   }
 }
@@ -39,18 +29,18 @@ $gutter-width: 16px;
 @for $i from 1 through $grid-columns {
   .col-#{$i} {
     flex: 0 0 calc(percentage(math.div($i, $grid-columns)) - $gutter-width);
-    max-width: percentage(math.div($i, $grid-columns));
+    max-width: calc(percentage(math.div($i, $grid-columns)) - $gutter-width);
     padding-right: math.div($gutter-width, 2);
     padding-left: math.div($gutter-width, 2);
   }
 }
 
-@each $breakpoint, $container-max-width in $container-max-widths {
-  @media (min-width: #{$container-max-width}) {
+@each $name, $breakpoint in $breakpoints {
+  @media screen and (min-width: #{$breakpoint}) {
     @for $i from 1 through $grid-columns {
-      .col-#{$breakpoint}-#{$i} {
-        flex: 0 0 percentage(math.div($i, $grid-columns));
-        max-width: percentage(math.div($i, $grid-columns));
+      .col-#{$name}-#{$i} {
+        flex: 0 0 calc(percentage(math.div($i, $grid-columns)) - $gutter-width);
+        max-width: calc(percentage(math.div($i, $grid-columns)) - $gutter-width);
       }
     }
   }

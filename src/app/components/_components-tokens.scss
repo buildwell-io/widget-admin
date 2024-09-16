@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use 'utils';
+
+@use './header/header-tokens';
+@use './shell/shell-tokens';
+@use './rail-navigation/rail-navigation-tokens';
+
+@function get-tokens($theme) {
+  @return utils.deep-merge-all(
+      header-tokens.get-tokens($theme),
+      shell-tokens.get-tokens($theme),
+      rail-navigation-tokens.get-tokens($theme),
+  );
+}

@@ -1,3 +1,5 @@
+@use 'utils';
+
 :host {
   display: flex;
   align-items: center;
@@ -20,6 +22,12 @@
   border-radius: 100px;
   box-sizing: border-box;
   overflow: hidden;
+
+  @include utils.use-token(background-color, header-profile-background-color);
+
+  svg path {
+    @include utils.use-token(fill, header-profile-path-color);
+  }
 }
 
 .crm-header-profile-img {

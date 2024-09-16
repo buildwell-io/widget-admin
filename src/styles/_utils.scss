@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@function deep-merge-all($maps...) {
+  $result: ();
+  @each $map in $maps {
+    $result: map.deep-merge($result, $map);
+  }
+  @return $result;
+}
+
+@mixin create-tokens-vars($tokens, $prefix: crm) {
+  & {
+    @each $key, $value in $tokens {
+      @if $value != null {
+        --#{$prefix}-#{$key}: #{$value};
+      }
+    }
+  }
+}
+
+@mixin use-token($property, $token) {
+  #{$property}: #{var(--crm-#{$token})};
+}

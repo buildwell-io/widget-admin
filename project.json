@@ -17,7 +17,22 @@
         "tsConfig": "./tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["./src/favicon.ico", "./src/assets"],
-        "styles": ["./src/styles.scss"],
+        "styles": [
+          "./src/styles.scss",
+          {
+            "input": "./src/styles/themes/light.theme.scss",
+            "inject": false,
+            "bundleName": "light-theme"
+          },
+          {
+            "input": "./src/styles/themes/dark.theme.scss",
+            "inject": false,
+            "bundleName": "dark-theme"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["./src/styles"]
+        },
         "scripts": []
       },
       "configurations": {

@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+
+@function get-tokens($theme) {
+  @return (
+    sign-in-container-background-color: mat.get-theme-color($theme, surface-container-lowest),
+  );
+}

@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use 'utils';
+
+@use './sign-in/sign-in-tokens';
+@use './sign-up/sign-up-tokens';
+
+@function get-tokens($theme) {
+  @return utils.deep-merge-all(
+      sign-in-tokens.get-tokens($theme),
+      sign-up-tokens.get-tokens($theme),
+  );
+}

@@ -1,0 +1,15 @@
+@use 'sass:color';
+@use '@angular/material' as mat;
+
+@function get-tokens($theme) {
+  @return (
+    rail-navigation-background-color: mat.get-theme-color($theme, surface),
+    rail-navigation-item-label-color: mat.get-theme-color($theme, on-surface-variant),
+    rail-navigation-item-label-font: mat.get-theme-typography($theme, label-medium, font),
+    rail-navigation-item-icon-color: mat.get-theme-color($theme, on-surface-variant),
+    rail-navigation-item-hover-icon-background-color: color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.08),
+    rail-navigation-item-focus-icon-background-color: color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.12),
+    rail-navigation-item-active-icon-background-color: color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.12),
+    rail-navigation-item-selected-icon-background-color: mat.get-theme-color($theme, secondary-container),
+  );
+}

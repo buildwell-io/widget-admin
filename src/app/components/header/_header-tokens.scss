@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+@function get-tokens($theme) {
+  @return (
+    header-profile-background-color: mat.get-theme-color($theme, primary-container),
+    header-profile-path-color: mat.get-theme-color($theme, on-primary-container),
+  );
+}

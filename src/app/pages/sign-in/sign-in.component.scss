@@ -1,3 +1,6 @@
+@use '../../../styles/breakpoints' as bp;
+@use 'utils';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -11,12 +14,34 @@
   display: flex;
   align-items: center;
 
-  width: 1040px;
-  min-height: 384px;
-  border-radius: 28px;
-  margin: 0 auto;
   padding: 16px;
   box-sizing: border-box;
+
+  @include utils.use-token(background-color, sign-in-container-background-color);
+
+  @include bp.respond-to('xs') {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  @include bp.respond-to('m') {
+    width: auto;
+    height: auto;
+    margin: 0 200px;
+    min-height: 384px;
+    border-radius: 28px;
+  }
+
+  @include bp.respond-to('l') {
+    width: 920px;
+    margin: 0 auto;
+  }
+
+  @include bp.respond-to('xl') {
+    width: 1040px;
+  }
 }
 
 .crm-sign-in-footer {
